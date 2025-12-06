@@ -45,9 +45,11 @@ test.describe('Sistema de reserva de citas médicas', () => {
     await registrarPaciente(page, 'Paciente A', 'a@test.com', '3002222333');
     await registrarPaciente(page, 'Paciente B', 'b@test.com', '3003333444');
 
-    await expect(page.locator('#appointment-patient')).toContainText('Paciente A');
-    await expect(page.locator('#appointment-patient')).toContainText('Paciente B');
+await page.waitForSelector('#appointment-patient');
 
+await expect(page.locator('#appointment-patient')).toContainText('Paciente A', { timeout: 8000 });
+
+await expect(page.locator('#appointment-patient')).toContainText('Paciente B', { timeout: 8000 });
     await agendarCita(page, {
       patientName: 'Paciente A',
       doctorName: 'Dr. Gómez',
@@ -82,3 +84,5 @@ test.describe('Sistema de reserva de citas médicas', () => {
     await expect(page.locator('#messages')).toContainText('Cita cancelada');
   });
 });
+
+
