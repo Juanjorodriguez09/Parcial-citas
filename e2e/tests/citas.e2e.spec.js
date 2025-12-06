@@ -5,6 +5,7 @@ async function registrarPaciente(page, name, email, phone) {
   await page.fill('#patient-email', email);
   await page.fill('#patient-phone', phone);
   await page.click('#patient-form button[type="submit"]');
+  await expect(page.locator('#messages')).toContainText('Paciente registrado', { timeout: 8000 });
 }
 
 async function agendarCita(page, { patientName, doctorName, date, time }) {
@@ -23,7 +24,7 @@ test.describe('Sistema de reserva de citas médicas', () => {
 
   test('flujo completo: registro de paciente y agendamiento exitoso', async ({ page }) => {
     await registrarPaciente(page, 'Paciente Exito', 'exito@test.com', '3001111222');
-    await expect(page.locator('#messages')).toContainText('Paciente registrado correctamente');
+
     await expect(page.locator('#appointment-patient')).toContainText('Paciente Exito');
 
     await agendarCita(page, {
@@ -45,11 +46,13 @@ test.describe('Sistema de reserva de citas médicas', () => {
     await registrarPaciente(page, 'Paciente A', 'a@test.com', '3002222333');
     await registrarPaciente(page, 'Paciente B', 'b@test.com', '3003333444');
 
-await page.waitForSelector('#appointment-patient');
+    await page.waitForFunction(() => {
+      const select = document.querySelector('#appointment-patient');
+      if (!select) return false;
+      const texts = Array.from(select.options).map(o => o.textContent);
+      return texts.includes('Paciente A') && texts.includes('Paciente B');
+    }, null, { timeout: 8000 });
 
-await expect(page.locator('#appointment-patient')).toContainText('Paciente A', { timeout: 8000 });
-
-await expect(page.locator('#appointment-patient')).toContainText('Paciente B', { timeout: 8000 });
     await agendarCita(page, {
       patientName: 'Paciente A',
       doctorName: 'Dr. Gómez',
@@ -84,5 +87,4 @@ await expect(page.locator('#appointment-patient')).toContainText('Paciente B', {
     await expect(page.locator('#messages')).toContainText('Cita cancelada');
   });
 });
-
 
