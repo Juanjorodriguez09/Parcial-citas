@@ -1,0 +1,5 @@
+node_modules/
+test-results/
+backend-api/dev.db
+backend-api/prisma/dev.db
+backend-api/node_modules/

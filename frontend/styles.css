@@ -1,0 +1,142 @@
+:root {
+  --bg: #f3f4f6;
+  --card-bg: #ffffff;
+  --border: #e5e7eb;
+  --text-main: #111827;
+  --text-muted: #6b7280;
+  --primary: #2563eb;
+  --primary-soft: #dbeafe;
+  --secondary: #059669;
+  --secondary-soft: #d1fae5;
+  --danger: #dc2626;
+  --radius: 10px;
+  --shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: radial-gradient(circle at top, #e0f2fe 0, var(--bg) 45%, #e5e7eb 100%);
+  color: var(--text-main);
+}
+
+.topbar {
+  background: #0f172a;
+  color: #f9fafb;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.5);
+}
+
+.subtitle {
+  margin: 0.2rem 0 0;
+  color: #cbd5f5;
+}
+
+.layout {
+  max-width: 1100px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.hint {
+  color: var(--text-muted);
+  font-size: .85rem;
+  margin-bottom: .7rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: .8rem;
+}
+
+.field input,
+.field select {
+  padding: .55rem .7rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #f9fafb;
+}
+
+.actions {
+  display: flex;
+  justify-content: end;
+}
+
+.btn {
+  padding: .55rem 1.1rem;
+  border-radius: 999px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn.primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn.secondary {
+  background: var(--secondary);
+  color: #fff;
+}
+
+.table-wrapper {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: .6rem;
+}
+
+tbody tr:nth-child(even) {
+  background: #f9fafb;
+}
+
+.cancel-btn {
+  background: #fee2e2;
+  color: var(--danger);
+  border: none;
+  padding: .3rem .7rem;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.messages {
+  margin-top: 1rem;
+  padding: .7rem;
+  border-radius: var(--radius);
+  min-height: 1.3rem;
+  font-size: .9rem;
+  border: 1px solid transparent;
+}
+
+.messages.error {
+  background: #fee2e2;
+  color: #b91c1c;
+  border-color: #fecaca;
+}
+
+.messages.success {
+  background: #ecfdf5;
+  color: #166534;
+  border-color: #bbf7d0;
+}
